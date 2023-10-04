@@ -1,0 +1,36 @@
+import random
+
+user_ticket = []
+lottery_numbers = [random.randint(1, 49) for i in range(7)]
+print("Please write your winning number here, Good Luck")
+for i in range(7):
+    while True:
+        try:
+            answers = int(input(f"Enter a number between 1-49 : "))
+            if 1 <= answers <= 49 and answers not in user_ticket:
+                user_ticket.append(answers)
+                break  # Add this line to exit the loop when a valid number is entered
+            else:
+                print("Invalid number, please input numbers between 1-49")
+        except ValueError:
+            print("Invalid input")
+
+matches = len(set(user_ticket).intersection(lottery_numbers))
+prize = None
+if matches == 3:
+    prize = 20
+elif matches == 4:
+    prize = 40
+elif matches == 5:
+    prize = 100
+elif matches == 6:
+    prize = 10000
+elif matches == 7:
+    prize = 1000000
+
+print(f'Your lottery numbers: {user_ticket}')
+print(f'The winning numbers are: {lottery_numbers}')
+if prize is not None:
+    print(f'Congratulations! You got {matches} matching numbers and won ${prize}')
+else:
+    print('Sorry, you lost :(')
